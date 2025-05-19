@@ -1,0 +1,56 @@
+  {
+    "about": {
+      "image": {
+        "src": "hanineImg.png",
+        "style": {
+          "maxWidth": "300px",
+          "borderRadius": "20px"
+        }
+      },
+      "typewriter": {
+        "words": ["Hanine", "a Web Developer", "a Problem Solver"],
+        "loop": false,
+        "cursor": true,
+        "cursorStyle": "|",
+        "typeSpeed": 70,
+        "deleteSpeed": 50,
+        "delaySpeed": 1000
+      },
+      "headingPrefix": "Hi, I'm",
+      "highlightColor": "#a9885d",
+      "paragraphs": [
+        "I specialize in creating responsive websites using the latest technologies.",
+        "My passion for delivering the best lies in creating cutting-edge designs that provide a seamless user experience by adding my own touch that takes the project to the next level."
+       ]
+    },
+    "quotes": [
+      { "id": 1, "text": "When you love what you do, you excel at it." },
+      { "id": 2, "text": "Programming is the closest thing we have to magic." },
+      { "id": 3, "text": "Simplicity is the soul of efficiency." },
+      { "id": 4, "text": "Code is my space, logic is my color." }
+    ],
+    "skills": [
+      { "id": 1, "icon": "FaHtml5", "name": "HTML5", "level": "95" },
+      { "id": 2, "icon": "FaCss3Alt", "name": "CSS3", "level": "90" },
+      { "id": 3, "icon": "FaJs", "name": "JavaScript", "level": "88" },
+      { "id": 4, "icon": "FaReact", "name": "React", "level": "85" },
+      { "id": 5, "icon": "FaPhp", "name": "PHP", "level": "80" },
+      { "id": 6, "icon": "SiMysql", "name": "MySQL", "level": "78" },
+      { "id": 7, "icon": "FaCogs", "name": "C#", "level": "72" },
+      { "id": 8, "icon": "FaJava", "name": "Java", "level": "70" },
+      { "id": 9, "icon": "FaDatabase", "name": "SQL Server", "level": "70" },
+      { "id": 10, "icon": "FaLinux", "name": "Linux", "level": "70" }
+    ],
+    "projects": [
+        {
+          "id": "1",
+          "name": "Esnad Takaful",
+          "description": "A website that helps promote health.",
+          "techStack": "C#, HTML, CSS, JS and others",
+          "link": "https://esnadtakaful.com/",
+          "image": "/EsnadTakaful.png",
+          "details": "The BeSure app has been carefully designed and implemented to be a trusted reference, providing step-by-step guidance and aiming to revolutionize the way people manage their health through a broad health network."
+        }
+    ]
+}
+  
