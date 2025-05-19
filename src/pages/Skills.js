@@ -10,23 +10,23 @@ function Skills() {
   const [isLoading, setIsLoading] = useState(true);
   const [fetchError, setFetchError] = useState(null);
 
-  const iconMapping = {
-    FaHtml5: <FaHtml5 />,
-    FaCss3Alt: <FaCss3Alt />,
-    FaJs: <FaJs />,
-    FaReact: <FaReact />,
-    FaPhp: <FaPhp />,
-    FaNodeJs: <FaNodeJs />,
-    FaGitAlt: <FaGitAlt />,
-    FaJava: <FaJava />,
-    FaLinux: <FaLinux />,
-    SiMysql: <SiMysql />,
-    SiDocker: <SiDocker />,
-    FaDatabase: <FaDatabase />,
-    FaCogs: <FaCogs />,
-  };
-
   useEffect(() => {
+    const iconMapping = {
+      FaHtml5: <FaHtml5 />,
+      FaCss3Alt: <FaCss3Alt />,
+      FaJs: <FaJs />,
+      FaReact: <FaReact />,
+      FaPhp: <FaPhp />,
+      FaNodeJs: <FaNodeJs />,
+      FaGitAlt: <FaGitAlt />,
+      FaJava: <FaJava />,
+      FaLinux: <FaLinux />,
+      SiMysql: <SiMysql />,
+      SiDocker: <SiDocker />,
+      FaDatabase: <FaDatabase />,
+      FaCogs: <FaCogs />,
+    };
+  
     const fetchSkills = async () => {
       try {
         const res = await axios.get('https://data-json-api.onrender.com/skills');
@@ -50,10 +50,10 @@ function Skills() {
         setIsLoading(false);
       }
     };
-
+  
     fetchSkills();
   }, []);
-
+  
 
   if (isLoading) {
     return (
