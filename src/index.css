@@ -345,6 +345,10 @@ body[data-theme='dark'] .skill-icon{
   color: #a9885d;
 }
 
+body[data-theme='light'] .skill-icon{
+  color: #7d6648;
+}
+
 .theme-toggle-link {
   cursor: pointer;
   border-bottom: 1px solid white !important;
