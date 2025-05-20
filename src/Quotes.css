@@ -1,11 +1,18 @@
 .quotes-container {
     text-align: center;
-    padding: 40px;
+    padding: 0 40px 40px 40px;
     max-width: 600px;
     margin: 0 auto;
     font-family: 'Georgia', serif;
     font-style: italic;
-    color: #333;
+  }
+
+  body[data-theme='dark'] .quotes-container {
+    color: #fff0db;
+  }
+  
+  body[data-theme='light'] .quotes-container {
+   color: #333 !important;
   }
   
   .quote-text {

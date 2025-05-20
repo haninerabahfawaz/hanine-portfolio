@@ -69,7 +69,7 @@ const AboutSection = () => {
   } = aboutInfo;
 
   return (
-    <section className="bg-light py-5">
+    <section className="py-5">
       <Container>
         <Quotes/>
         <Row className="align-items-center">
@@ -84,9 +84,9 @@ const AboutSection = () => {
             />
           </Col>
           <Col md={6}>
-            <h1 className="mb-3">
+            <h1 className="mb-3" style={{fontSize: '30px'}}>
               {headingPrefix}{' '}
-              <span style={{ color: highlightColor }}>
+              <span style={{ color: highlightColor}}>
                 <Typewriter
                   words={typewriter.words}
                   loop={typewriter.loop}

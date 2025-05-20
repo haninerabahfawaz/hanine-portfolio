@@ -87,12 +87,30 @@ function Skills() {
   return (
     <section className="skills-section py-5">
       <Container>
-        <h2 className="text-center mb-4">My Skills</h2>
+      
+      <h2 className="text-center mb-0" style={{ fontSize: '28px' }}>
+        My Skills
+      </h2>
+      <div className="flex justify-center text-center mb-3">
+        <svg
+          viewBox="0 0 150 20"
+          width="150"
+          height="20"
+        >
+          <path
+            d="M0,5 Q37.5,0 75,5 T150,5"
+            stroke="#d5bf9f"
+            strokeWidth="2"
+            fill="transparent"
+          />
+        </svg>
+      </div>
+
         <Row>
           {skills.slice(0, visibleCount).map((skill, index) => (
             <Col md={6} className="mb-4" key={index}>
               <div className="d-flex align-items-center mb-2">
-                <div className="me-3" style={{ fontSize: '30px', color: '#7d6648' }}>
+                <div className="me-3 skill-icon" style={{ fontSize: '30px' }}>
                   {skill.icon}
                 </div>
                 <strong>{skill.name}</strong>

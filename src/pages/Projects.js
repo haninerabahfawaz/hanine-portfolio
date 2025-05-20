@@ -75,7 +75,23 @@ function Projects() {
   return (
     <div className="projects-section py-5">
       <Container>
-        <h2 className="text-center mb-4">My Projects</h2>
+        <h2 className="text-center mb-0" style={{ fontSize: '28px'}}>
+           My Projects
+        </h2>
+        <div className="flex justify-center text-center mb-3">
+          <svg
+            viewBox="0 0 150 10"
+            width="150"
+            height="10"
+          >
+            <path
+              d="M0,5 Q37.5,0 75,5 T150,5"
+              stroke="#d5bf9f"
+              strokeWidth="2"
+              fill="transparent"
+            />
+          </svg>
+        </div>
         <Row xs={1} md={2} lg={3} className="g-4">
           {projects.slice(0, visibleCount).map((project, idx) => (
             <Col key={idx}>
@@ -127,16 +143,16 @@ function Projects() {
                 src="HanineLogo.png"
                 alt="Coming Soon"
                 className="project-image"
-                style={{ height: '220px' }}
+                style={{ height: '180px' }}
                 onError={(e) => {
                   e.target.onerror = null;
                   e.target.src = '/HanineLogo.png';
                 }}
               />
               <Card.Body>
-                <Card.Title className="card-title" style={{ textAlign: 'center' }}>
+                <Card.Text className="project-next" style={{ textAlign: 'center' }}>
                   What's the next?
-                </Card.Title>
+                </Card.Text>
               </Card.Body>
             </Card>
           </Col>

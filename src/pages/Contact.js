@@ -37,8 +37,25 @@ const Contact = () => {
   return (
     <div className="py-5">
       <Container>
-        <section className="contact-form bg-light py-5">
-            <h2 className="text-center mb-4">Contact Me</h2>
+        <h2 className="text-center mb-0 contact-header">
+            Contact Me
+          </h2>
+          <div className="flex justify-center text-center mb-3">
+            <svg
+              viewBox="0 0 150 10"
+              width="150"
+              height="10"
+            >
+              <path
+                d="M0,5 Q37.5,0 75,5 T150,5"
+                stroke="#d5bf9f"
+                strokeWidth="2"
+                fill="transparent"
+              />
+            </svg>
+          </div>
+        <section className="contact-form py-5">
+
           <form method='post' onSubmit={handleSubmit}>
             <Row>
               <Col md={6} className="mb-4 mb-md-0">

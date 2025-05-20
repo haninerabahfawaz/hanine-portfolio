@@ -3,10 +3,7 @@ import { FaLinkedin } from 'react-icons/fa';
 
 const Footer = () => {
   return (
-    <footer
-        className="text-white py-3 footerSection"
-        style={{ backgroundColor: '#7d6648', fontSize: '20px' }}
-      >
+    <footer className="text-white py-3 footerSection">
         <Container>
           <div className="d-flex flex-column flex-md-row justify-content-between align-items-center rights-reserved text-center text-md-start">
             <div className="mb-2 mb-md-0">
@@ -20,7 +17,7 @@ const Footer = () => {
                 className="text-white mx-2 social-media"
                 style={{ textDecoration: 'none' }}
               >
-                <FaLinkedin style={{ fontSize: '25px' }} />
+                <FaLinkedin style={{ fontSize: '20px' }} />
               </a>
             </div>
           </div>
