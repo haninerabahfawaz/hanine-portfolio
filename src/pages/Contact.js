@@ -1,41 +1,53 @@
 import { useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { FiSend } from 'react-icons/fi';
-import emailjs from 'emailjs-com';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Contact = () => {
 
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
-  const [messageBody, setMessageBody] = useState('');
+  const [message, setMessage] = useState('');
 
-  const handleSubmit = (e) =>{
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const serviceID = 'service_1h0munk';
-    const templateID = 'template_cisk586';
-    const userID = 'x7mZCKYP4hIcsw37W';
-
-    const templateParams = {
+  
+    const payload = {
       fullName,
       email,
-      message: messageBody
+      message
     };
-
-    emailjs.send(serviceID, templateID, templateParams, userID)
-      .then((response) => {
-        alert("Message sent successfully!");
-        setFullName('');
-        setEmail('');
-        setMessageBody('');
-      }, (error) => {
-        console.error("FAILED...", error);
-        alert("Failed to send message.");
+  
+    try {
+      const res = await fetch('https://backendemail-w61m.onrender.com/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
       });
-  }
-
+  
+      const data = await res.json();
+  
+      if (res.ok) {
+        toast.success(data.message);
+      } else {
+        toast.error(data.message || "Failed to send message.");
+      }
+  
+      setFullName('');
+      setEmail('');
+      setMessage('');
+    } catch (err) {
+      console.error(err);
+      toast.error("Something went wrong.");
+    }
+  };
+  
   return (
     <div className="py-5">
+      <ToastContainer position="top-center" />
       <Container>
         <h2 className="text-center mb-0 contact-header">
             Contact Me
@@ -81,8 +93,8 @@ const Contact = () => {
                   <textarea
                     name="message"
                     placeholder="Your Message"
-                    value={messageBody}
-                    onChange={(e) => setMessageBody(e.target.value)}
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
                     required
                   />
               </Col>
