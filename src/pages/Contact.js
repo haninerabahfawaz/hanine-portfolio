@@ -9,9 +9,11 @@ const Contact = () => {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); // Start loading
   
     const payload = {
       fullName,
@@ -32,18 +34,20 @@ const Contact = () => {
   
       if (res.ok) {
         toast.success(data.message);
+        setFullName('');
+        setEmail('');
+        setMessage('');
       } else {
         toast.error(data.message || "Failed to send message.");
       }
-  
-      setFullName('');
-      setEmail('');
-      setMessage('');
     } catch (err) {
       console.error(err);
       toast.error("Something went wrong.");
+    } finally {
+      setLoading(false); // Stop loading
     }
   };
+  
   
   return (
     <div className="py-5">
@@ -101,10 +105,19 @@ const Contact = () => {
             </Row>
 
             <div className="submit-container">
-              <button type="submit" className="submit-button">
-                Send Message <FiSend style={{ marginLeft: '5px' }} />
+              <button type="submit" className="submit-button" disabled={loading}>
+                {loading ? (
+                  <>
+                    Sending...
+                    <span className="spinner" style={{ marginLeft: '8px' }} />
+                  </>
+                ) : (
+                  <>
+                    Send Message <FiSend style={{ marginLeft: '5px' }} />
+                  </>
+                )}
               </button>
-            </div>
+          </div>
 
           </form>
         </section>   
