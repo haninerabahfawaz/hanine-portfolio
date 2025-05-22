@@ -43,7 +43,7 @@ const NavBarSection = () => {
       {/* Collapse Toggle + Theme Toggle on small screens */}
       <div className="d-flex align-items-center d-lg-none">
         {/* Theme Toggle - Small Screens Only */}
-        <div onClick={toggleTheme} className="me-2">
+        <div onClick={toggleTheme} className="me-3">
           <div className={`dual-icon-toggle ${darkMode ? 'dark' : 'light'}`}>
             <FaSun size={14} className="sun-icon" />
             <FaMoon size={14} className="moon-icon" />
