@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Navbar, Nav, Container } from 'react-bootstrap';
+import { Navbar, Nav, Container} from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import HanineLogo from '../assets/HanineLogo.png';
 import { FaMoon, FaSun } from 'react-icons/fa'; // Icons for theme toggle
@@ -53,11 +53,27 @@ const NavBarSection = () => {
             {/* Theme Toggle Icon */}
             <Nav.Link
               onClick={toggleTheme}
-              className="theme-toggle-link ms-lg-5"
+              className="theme-toggle-link ms-lg-5 d-flex align-items-center"
             >
-              {darkMode ? <FaSun size={16} /> : <FaMoon size={16} />}
+              {darkMode ? (
+                <>
+                  <div className='toggle-text'>
+                      <span className="d-inline d-sm-none me-2"
+                        style={{}}>
+                        Light Mode 
+                      </span>
+                      <FaSun size={16} className="me-1" />
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div  className='toggle-text'>
+                    <span className="d-inline d-sm-none me-2"> Dark Mode </span>
+                    <FaMoon size={16} className="me-1" />
+                  </div>
+                </>
+              )}
             </Nav.Link>
-
           </Nav>
         </Navbar.Collapse>
       </Container>

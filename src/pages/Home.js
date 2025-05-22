@@ -84,7 +84,7 @@ const AboutSection = () => {
             />
           </Col>
           <Col md={6}>
-            <h1 className="mb-3" style={{fontSize: '30px'}}>
+            <h1 className="mb-3 text-type-writer">
               {headingPrefix}{' '}
               <span style={{ color: highlightColor}}>
                 <Typewriter
