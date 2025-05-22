@@ -351,7 +351,7 @@ body[data-theme='light'] .skill-icon{
 
 .theme-toggle-link {
   cursor: pointer;
-  border-bottom: 1px solid white !important;
+  /*border-bottom: 1px solid white !important;*/
 }
 
 
@@ -398,7 +398,63 @@ body[data-theme='light'] .skill-icon{
     border-radius: 40px;
     padding: 5px 10px;
   }
+
+  .nav-portfolio{
+    font-size: 16px !important;
+  }
 }
+
+.nav-img-logo{
+  height: 50px;
+  width: 50px;
+}
+
+.dual-icon-toggle {
+  width: 50px;
+  height: 24px;
+  border-radius: 999px;
+  background-color: #ccc;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  color: #fff;
+}
+
+.dual-icon-toggle.light {
+  background-color: #d5bf9f;
+  color: #7d6648;;
+}
+
+.dual-icon-toggle.dark {
+  background-color: #ffffff40;
+  color: #d5bf9f;;
+}
+
+.dual-icon-toggle .sun-icon,
+.dual-icon-toggle .moon-icon {
+  z-index: 2;
+}
+
+.dual-icon-toggle .toggle-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: white;
+  transition: transform 0.3s ease;
+  z-index: 1;
+}
+
+.dual-icon-toggle.dark .toggle-thumb {
+  transform: translateX(26px);
+}
+
 
 
 
