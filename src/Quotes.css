@@ -1,11 +1,16 @@
 .quotes-container {
     text-align: center;
-    padding: 0 35px 0px 35px;
+    padding: 0 35px;
     max-width: 600px;
     margin: 0 auto;
     font-family: 'Georgia', serif;
     font-style: italic;
     height: 100px;
+
+    /* Add these for vertical centering */
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   body[data-theme='dark'] .quotes-container {
