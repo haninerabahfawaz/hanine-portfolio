@@ -9,7 +9,7 @@ const Footer = () => {
             <div className="mb-2 mb-md-0">
               &copy; {new Date().getFullYear()} Hanine's Portfolio. All rights reserved.
             </div>
-            <div className="social-media-div">
+            <div>
               <a
                 href="https://www.linkedin.com/in/hanine-fawaz-609361245?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
                 target="_blank"

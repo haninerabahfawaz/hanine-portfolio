@@ -72,8 +72,8 @@ const Quotes = () => {
   if (!quotes) return null;
 
   return (
-    <div className="quotes-container">
-       {quotes.length > 0 && (
+    <div className="quotes-container flex items-center justify-center text-center overflow-hidden">
+      {quotes.length > 0 && (
         <div className={`quote-text ${fade ? "fade-in" : "fade-out"}`}>
           <p>{quotes[currentIndex].text}</p>
         </div>
