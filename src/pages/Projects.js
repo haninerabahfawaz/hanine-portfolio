@@ -1,14 +1,28 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Card, Button, Col, Row, Container, Spinner, Alert } from 'react-bootstrap';
+import { Card, Button, Col, Row, Container, Spinner, Alert, Modal } from 'react-bootstrap';
 
 function Projects() {
   const [projects, setProjects] = useState([]);
-  const [visibleCount, setVisibleCount] = useState(3); // Start with 3
-  const [detailsVisible, setDetailsVisible] = useState({}); // Track read more/less
+  const [visibleCount, setVisibleCount] = useState(3); 
+  const [detailsVisible, setDetailsVisible] = useState({}); 
   const [isLoading, setIsLoading] = useState(true);
   const [fetchError, setFetchError] = useState(null);
-  
+  const [selectedProject, setSelectedProject] = useState(null);
+
+  // Sort projects by created_at DESC
+  const sortedProjects = [...projects].sort(
+    (a, b) => new Date(b.created_at) - new Date(a.created_at)
+  );
+
+  const handleShowResources = (project) => {
+    setSelectedProject(project);
+  };
+
+  const handleCloseResources = () => {
+    setSelectedProject(null);
+  };
+
   const toggleDetailsVisibility = (index) => {
     setDetailsVisible((prevState) => ({
       ...prevState,
@@ -48,6 +62,7 @@ function Projects() {
     fetchProjects();
   }, []);
 
+
   if (isLoading) {
     return (
       <section className="py-5 text-center">
@@ -75,15 +90,11 @@ function Projects() {
   return (
     <div className="projects-section py-5">
       <Container>
-        <h2 className="text-center mb-0" style={{ fontSize: '28px'}}>
-           My Projects
+        <h2 className="text-center mb-0" style={{ fontSize: '28px' }}>
+          My Projects
         </h2>
         <div className="flex justify-center text-center mb-3">
-          <svg
-            viewBox="0 0 150 10"
-            width="150"
-            height="10"
-          >
+          <svg viewBox="0 0 150 10" width="150" height="10">
             <path
               d="M0,5 Q37.5,0 75,5 T150,5"
               stroke="#d5bf9f"
@@ -92,47 +103,77 @@ function Projects() {
             />
           </svg>
         </div>
+
         <Row xs={1} md={2} lg={3} className="g-4">
-          {projects.slice(0, visibleCount).map((project, idx) => (
-            <Col key={idx}>
-              <Card className="project-card">
-                <img
-                  src={project.image}
-                  alt={project.name}
-                  className="project-image"
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = '/HanineLogo.png';
-                  }}
-                />
-                <Card.Body>
-                  <Card.Title className="card-title">{project.name}</Card.Title>
-                  <Card.Text className="card-text">
-                    {project.description}{' '}
-                    <Button
-                      variant="link"
-                      className="read-btn"
-                      style={{ cursor: 'pointer', color: '#a9885d', padding: '0' }}
-                      onClick={() => toggleDetailsVisibility(idx)}
-                    >
-                      {detailsVisible[idx] ? 'Read Less' : 'Read More'}
-                    </Button>
-                  </Card.Text>
-                  {detailsVisible[idx] && (
-                    <Card.Text className="card-details">{project.details}</Card.Text>
-                  )}
-                  <Card.Text>
-                    <strong>Technologies:</strong> {project.techStack}
-                  </Card.Text>
+          {sortedProjects.slice(0, visibleCount).map((project, idx) => (
+            <Col key={project.id}>
+             <Card className="project-card h-100 d-flex flex-column">
+              <img
+                src={project.image}
+                alt={project.name}
+                className="project-image"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = '/HanineLogo.png';
+                }}
+              />
+              <Card.Body className="d-flex flex-column">
+                <Card.Title className="card-title">
+                  {project.name}
+                </Card.Title>
+                <Card.Subtitle className='mb-2' style={{ fontSize: '0.8rem', color: '#d5bf9f' }}>
+                  {new Date(project.created_at).toLocaleDateString(undefined, {
+                          year: 'numeric',
+                          month: 'short',
+                          day: 'numeric',
+                    })}
+                </Card.Subtitle>
+                <Card.Text className="card-text card-text-bg">
+                  {project.description}{' '}
                   <Button
-                    href={project.link}
-                    className="project-btn"
-                    target="_blank"
+                    variant="link"
+                    className="read-btn"
+                    style={{
+                      cursor: 'pointer',
+                      color: '#a9885d',
+                      padding: '0',
+                    }}
+                    onClick={() => toggleDetailsVisibility(idx)}
                   >
-                    View Project
+                    {detailsVisible[idx] ? 'Read Less' : 'Read More'}
                   </Button>
-                </Card.Body>
-              </Card>
+                </Card.Text>
+
+                {detailsVisible[idx] && (
+                  <Card.Text className="card-details">{project.details}</Card.Text>
+                )}
+
+                {/* Spacer to push button to the bottom */}
+                <div className="mt-auto">
+                  <Card.Text className='tech-div'>
+                    <strong className='tech-style'>Technologies:</strong> {project.techStack}
+                  </Card.Text>
+                  {project.link ? (
+                    <Button
+                      variant="light"
+                      href={project.link}
+                      className="project-btn w-100"
+                      target="_blank"
+                    >
+                      View Project
+                    </Button>
+                  ) : project.resources?.length > 0 ? (
+                    <Button
+                      variant="light"
+                      className="project-resources w-100"
+                      onClick={() => handleShowResources(project)}
+                    >
+                      Resources
+                    </Button>
+                  ) : null}
+                </div>
+              </Card.Body>
+            </Card>
             </Col>
           ))}
 
@@ -159,15 +200,46 @@ function Projects() {
         </Row>
 
         {/* Show More / Show Less Button */}
-        {projects.length > 6 && (
+        {projects.length > 3 && (
           <div className="text-end mt-4">
             <Button className="show-more-projects" onClick={handleToggleShow}>
               {visibleCount >= projects.length ? 'Show Less' : 'Show More'}
             </Button>
           </div>
         )}
+
+        {/* Resources Modal */}
+        {selectedProject && selectedProject.resources?.length > 0 && (
+          <Modal
+            show={true}
+            onHide={handleCloseResources}
+            size="lg"
+            centered
+          >
+            <Modal.Header closeButton className='modal-project'>
+              <Modal.Title>Resources – {selectedProject.name}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <Row>
+                {selectedProject.resources.map((res, i) => (
+                  <Col md={6} key={i} className="mb-3">
+                    <Card className='h-100 project-modal'>
+                      <Card.Img variant="top" src={res.src} />
+                      <div className='mt-auto'>
+                        <Card.Body>
+                          <Card.Text className="text-center">{res.title}</Card.Text>
+                        </Card.Body>
+                      </div>
+                    </Card>
+                  </Col>
+                ))}
+              </Row>
+            </Modal.Body>
+          </Modal>
+        )}
       </Container>
     </div>
+  
   );
 }
 

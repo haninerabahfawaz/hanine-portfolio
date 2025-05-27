@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Container, Row, Col, ProgressBar, Button, Spinner, Alert } from 'react-bootstrap';
+import { Container, Row, Col,/* ProgressBar,*/ Button, Spinner, Alert } from 'react-bootstrap';
 import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaPhp, FaNodeJs, FaGitAlt, FaJava, FaLinux, FaDatabase, FaCogs } from 'react-icons/fa';
 import { SiMysql, SiDocker } from 'react-icons/si';
 import axios from 'axios';
@@ -108,24 +108,24 @@ function Skills() {
 
         <Row>
           {skills.slice(0, visibleCount).map((skill, index) => (
-            <Col md={6} className="mb-4" key={index}>
-              <div className="d-flex align-items-center mb-2">
+            <Col md={3} className="mb-4" key={index}>
+              <div className="d-flex align-items-center mb-2 skill">
                 <div className="me-3 skill-icon" style={{ fontSize: '30px' }}>
                   {skill.icon}
                 </div>
                 <strong>{skill.name}</strong>
               </div>
-              <ProgressBar
+              {/*<ProgressBar
                 now={parseInt(skill.level)}
                 label={`${skill.level}%`}
                 className="custom-progress"
-              />
+              */}
             </Col>
           ))}
         </Row>
 
         {skills.length > 6 && (
-          <div className="text-end mt-4">
+          <div className="text-end">
             <Button className='show-more-skills' onClick={isAllVisible ? handleShowLess : handleShowMore}>
               {isAllVisible ? 'Show Less' : 'Show More'}
             </Button>

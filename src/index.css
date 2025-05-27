@@ -124,12 +124,32 @@ body[data-theme='dark'] .project-card {
   justify-content: center !important;
   border-radius: 40px;
   padding: 12px 20px;
+  color:white;
 }
 
 .project-card .project-btn:hover {
-  text-align: center;
   background-color: #7d6648 !important;
   border-color: #d5bf9f !important;
+}
+
+.project-card .project-resources {
+  margin-top: 20px;
+  text-align: center;
+  color: #7d6648;
+  background-color: white;
+  border: 1px solid #d5bf9f;
+  font-weight: bold !important;
+  font-size: 16px !important;
+  display: flex !important;
+  justify-content: center !important;
+  border-radius: 40px;
+  padding: 12px 20px;
+}
+
+.project-card .project-resources:hover {
+  background-color: white  !important;
+  color: #a9885d !important;
+  border: 1px solid #a9885d !important;
 }
 
 .project-next{
@@ -249,14 +269,22 @@ body[data-theme='dark'] .contact-form label{
   font-size: 20px !important;
   color: #958165 !important;
   font-weight: bold !important;
+  margin-bottom: 7px;
 }
 
 body[data-theme='dark'] .card-title{
   color: #a9885d !important;;
 } 
 
-.card-text{
+.project-card .card-text-bg{
   font-size: 16px;
+  background-color: #e7dd9340;
+  border-radius: 10px;
+  padding: 7px;
+}
+
+body[data-theme='dark'] .project-card .card-text-bg{
+  background-color: #72727261;
 }
 
 .read-btn{
@@ -455,6 +483,61 @@ body[data-theme='light'] .skill-icon{
   transform: translateX(26px);
 }
 
+.skill {
+  justify-content: center;
+  border-radius: 40px;
+  align-items: center;
+  border: 1px solid #d5bf9f;
+  transition: box-shadow 0.3s ease;
+}
+
+.skill:hover {
+  box-shadow: 0 4px 12px #d5bf9f;
+}
+
+.tech-style{
+  background: #d5bf9f;
+  padding: 0px 10px;
+  color: #fff;
+  border-radius: 40px;
+}
+
+body[data-theme='dark'] .tech-style{
+  background: #d5bf9f42;
+  color: #d5b37aba;
+}
+
+.project-modal{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-modal-body{
+  align-items: center;
+  display: flex;
+}
+
+body[data-theme='dark'] .modal-project{
+  background-color: #3f3f3f !important;
+  color: white !important;
+}
+
+body[data-theme='dark'] .modal-header .btn-close {
+  color: white !important;
+  background-color: #ffffffa3;
+}
+
+body[data-theme='dark'] .modal-body{
+  background-color: #3f3f3f !important;
+  color: white !important;
+} 
+
+body[data-theme='dark'] .modal-body .card{
+  background-color: #3f3f3f !important;
+  color: white !important;
+  border: 1px solid #fff;
+} 
 
 
 
