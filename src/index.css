@@ -130,6 +130,7 @@ body[data-theme='dark'] .project-card {
 .project-card .project-btn:hover {
   background-color: #7d6648 !important;
   border-color: #d5bf9f !important;
+  color:white;
 }
 
 .project-card .project-resources {
