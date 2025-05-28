@@ -217,7 +217,7 @@ function Projects() {
             centered
           >
             <Modal.Header closeButton className='modal-project'>
-              <Modal.Title>Resources – {selectedProject.name}</Modal.Title>
+              <Modal.Title style={{fontSize:'20px'}}>Resources – {selectedProject.name}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <Row>
@@ -227,7 +227,7 @@ function Projects() {
                       <Card.Img variant="top" src={res.src} />
                       <div className='mt-auto'>
                         <Card.Body>
-                          <Card.Text className="text-center">{res.title}</Card.Text>
+                          <Card.Text className="text-center" style={{fontSize:'16px'}}>{res.title}</Card.Text>
                         </Card.Body>
                       </div>
                     </Card>
