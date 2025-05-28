@@ -105,9 +105,9 @@ function Projects() {
         </div>
 
         <Row xs={1} md={2} lg={3} className="g-4">
-          {sortedProjects.slice(0, visibleCount).map((project, idx) => (
-            <Col key={project.id}>
-             <Card className="project-card h-100 d-flex flex-column">
+        {sortedProjects.slice(0, visibleCount).map((project, idx) => (
+          <Col key={project.id} className="d-flex">
+            <Card className={`project-card d-flex flex-column ${detailsVisible[idx] ? 'expanded' : ''}`}>
               <img
                 src={project.image}
                 alt={project.name}
@@ -118,26 +118,20 @@ function Projects() {
                 }}
               />
               <Card.Body className="d-flex flex-column">
-                <Card.Title className="card-title">
-                  {project.name}
-                </Card.Title>
-                <Card.Subtitle className='mb-2' style={{ fontSize: '0.8rem', color: '#d5bf9f' }}>
+                <Card.Title className="card-title">{project.name}</Card.Title>
+                <Card.Subtitle className="mb-2" style={{ fontSize: '0.8rem', color: '#d5bf9f' }}>
                   {new Date(project.created_at).toLocaleDateString(undefined, {
-                          year: 'numeric',
-                          month: 'short',
-                          day: 'numeric',
-                    })}
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric',
+                  })}
                 </Card.Subtitle>
                 <Card.Text className="card-text card-text-bg">
                   {project.description}{' '}
                   <Button
                     variant="link"
                     className="read-btn"
-                    style={{
-                      cursor: 'pointer',
-                      color: '#a9885d',
-                      padding: '0',
-                    }}
+                    style={{ cursor: 'pointer', color: '#a9885d', padding: 0 }}
                     onClick={() => toggleDetailsVisibility(idx)}
                   >
                     {detailsVisible[idx] ? 'Read Less' : 'Read More'}
@@ -148,34 +142,24 @@ function Projects() {
                   <Card.Text className="card-details">{project.details}</Card.Text>
                 )}
 
-                {/* Spacer to push button to the bottom */}
                 <div className="mt-auto">
-                  <Card.Text className='tech-div'>
-                    <strong className='tech-style'>Technologies:</strong> {project.techStack}
+                  <Card.Text className="tech-div">
+                    <strong className="tech-style">Technologies:</strong> {project.techStack}
                   </Card.Text>
                   {project.link ? (
-                    <Button
-                      variant="light"
-                      href={project.link}
-                      className="project-btn w-100"
-                      target="_blank"
-                    >
+                    <Button variant="light" href={project.link} className="project-btn w-100" target="_blank">
                       View Project
                     </Button>
                   ) : project.resources?.length > 0 ? (
-                    <Button
-                      variant="light"
-                      className="project-resources w-100"
-                      onClick={() => handleShowResources(project)}
-                    >
+                    <Button variant="light" className="project-resources w-100" onClick={() => handleShowResources(project)}>
                       Resources
                     </Button>
                   ) : null}
                 </div>
               </Card.Body>
             </Card>
-            </Col>
-          ))}
+          </Col>
+        ))}
 
           {/* Coming soon card */}
           <Col>

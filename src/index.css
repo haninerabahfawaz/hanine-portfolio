@@ -101,6 +101,7 @@ body[data-theme='dark'] .skills-section h2{
   background-color: #ffffff; /* default light mode */
 }
 
+
 /* Dark mode support via body attribute */
 body[data-theme='dark'] .project-card {
   background-color: #3f3f3f !important;
@@ -489,10 +490,11 @@ body[data-theme='light'] .skill-icon{
   border-radius: 40px;
   align-items: center;
   border: 1px solid #d5bf9f;
-  transition: box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .skill:hover {
+  transform: scale(1.05);
   box-shadow: 0 4px 12px #d5bf9f;
 }
 
