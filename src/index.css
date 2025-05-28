@@ -146,12 +146,15 @@ body[data-theme='dark'] .project-card {
   justify-content: center !important;
   border-radius: 40px;
   padding: 12px 20px;
+  transition: box-shadow 0.3s ease, transform 0.3s ease !important;
 }
 
 .project-card .project-resources:hover {
-  background-color: white  !important;
+  background-color: white !important;
   color: #a9885d !important;
   border: 1px solid #a9885d !important;
+  box-shadow: 0 5px 5px #a9885d !important; /* softer and larger shadow */
+  transform: translateY(-3px) !important; /* subtle lift effect */
 }
 
 .project-next{
