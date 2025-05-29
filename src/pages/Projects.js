@@ -126,7 +126,7 @@ function Projects() {
                     day: 'numeric',
                   })}
                 </Card.Subtitle>
-                <Card.Text className="card-text card-text-bg" style={{ flexGrow: 1 }}>
+                <Card.Text className="card-text card-text-bg">
                   {project.description}{' '}
                   <Button
                     variant="link"
