@@ -513,6 +513,18 @@ body[data-theme='dark'] .tech-style{
   color: #d5bf9f;
 }
 
+.details-style{
+  font-size: 16px;
+  background-color: #d5bf9f21;
+  border-radius: 10px;
+  padding: 7px;
+}
+
+body[data-theme='dark'] .details-style{
+  background: #d5bf9f42;
+  color: #d5bf9f;
+}
+
 .project-modal{
   display: flex;
   align-items: center;
@@ -544,6 +556,14 @@ body[data-theme='dark'] .modal-body .card{
   color: white !important;
   border: 1px solid #fff;
 } 
+
+.nav-tabs .nav-link{
+  color:#7d6648;
+}
+
+.nav-tabs .nav-link:hover{
+  color:#a9885d;
+}
 
 
 

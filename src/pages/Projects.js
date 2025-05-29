@@ -126,7 +126,7 @@ function Projects() {
                     day: 'numeric',
                   })}
                 </Card.Subtitle>
-                <Card.Text className="card-text card-text-bg">
+                <Card.Text className="card-text card-text-bg" style={{ flexGrow: 1 }}>
                   {project.description}{' '}
                   <Button
                     variant="link"
@@ -152,7 +152,7 @@ function Projects() {
                     </Button>
                   ) : project.resources?.length > 0 ? (
                     <Button variant="light" className="project-resources w-100" onClick={() => handleShowResources(project)}>
-                      Resources
+                      Show Resources
                     </Button>
                   ) : null}
                 </div>
