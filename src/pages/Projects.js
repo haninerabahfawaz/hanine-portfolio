@@ -1,27 +1,55 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Card, Button, Col, Row, Container, Spinner, Alert, Modal } from 'react-bootstrap';
+import { Card, Button, Col, Row, Container, Spinner, Alert, Modal, Tabs, Tab } from 'react-bootstrap';
 
 function Projects() {
   const [projects, setProjects] = useState([]);
-  const [visibleCount, setVisibleCount] = useState(3); 
-  const [detailsVisible, setDetailsVisible] = useState({}); 
+  const [visibleCount, setVisibleCount] = useState(3);
+  const [detailsVisible, setDetailsVisible] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [fetchError, setFetchError] = useState(null);
   const [selectedProject, setSelectedProject] = useState(null);
+  const [modalDetailsProject, setModalDetailsProject] = useState(null);
+  const [activeModalTab, setActiveModalTab] = useState('resources');
 
-  // Sort projects by created_at DESC
   const sortedProjects = [...projects].sort(
     (a, b) => new Date(b.created_at) - new Date(a.created_at)
   );
 
+
   const handleShowResources = (project) => {
-    setSelectedProject(project);
+    const screenWidth = window.innerWidth;
+    if (screenWidth >= 768) {
+      // Medium and large screens
+      setModalDetailsProject(project);
+      setActiveModalTab('resources');
+    } else {
+      // Small screens
+      setSelectedProject(project);
+    }
+  };
+
+  const handleCloseDetailsModal = () => {
+    setModalDetailsProject(null);
+    setActiveModalTab('resources');
   };
 
   const handleCloseResources = () => {
     setSelectedProject(null);
   };
+
+  const handleDetailsClick = (project, index) => {
+    const screenWidth = window.innerWidth;
+    if (screenWidth >= 768) {
+      // Medium and large screens
+      setModalDetailsProject(project);
+      setActiveModalTab('details');
+    } else {
+      // Small screens
+      toggleDetailsVisibility(index);
+    }
+  };
+
 
   const toggleDetailsVisibility = (index) => {
     setDetailsVisible((prevState) => ({
@@ -32,9 +60,9 @@ function Projects() {
 
   const handleToggleShow = () => {
     if (visibleCount >= projects.length) {
-      setVisibleCount(3); // Reset to 3
+      setVisibleCount(3);
     } else {
-      setVisibleCount((prev) => prev + 3); // Show 3 more
+      setVisibleCount((prev) => prev + 3);
     }
   };
 
@@ -61,7 +89,6 @@ function Projects() {
 
     fetchProjects();
   }, []);
-
 
   if (isLoading) {
     return (
@@ -105,65 +132,65 @@ function Projects() {
         </div>
 
         <Row xs={1} md={2} lg={3} className="g-4">
-        {sortedProjects.slice(0, visibleCount).map((project, idx) => (
-          <Col key={project.id} className="d-flex">
-            <Card className={`project-card d-flex flex-column ${detailsVisible[idx] ? 'expanded' : ''}`}>
-              <img
-                src={project.image}
-                alt={project.name}
-                className="project-image"
-                onError={(e) => {
-                  e.target.onerror = null;
-                  e.target.src = '/HanineLogo.png';
-                }}
-              />
-              <Card.Body className="d-flex flex-column">
-                <Card.Title className="card-title">{project.name}</Card.Title>
-                <Card.Subtitle className="mb-2" style={{ fontSize: '0.8rem', color: '#d5bf9f' }}>
-                  {new Date(project.created_at).toLocaleDateString(undefined, {
-                    year: 'numeric',
-                    month: 'short',
-                    day: 'numeric',
-                  })}
-                </Card.Subtitle>
-                <Card.Text className="card-text card-text-bg">
-                  {project.description}{' '}
-                  <Button
-                    variant="link"
-                    className="read-btn"
-                    style={{ cursor: 'pointer', color: '#a9885d', padding: 0 }}
-                    onClick={() => toggleDetailsVisibility(idx)}
-                  >
-                    {detailsVisible[idx] ? 'Read Less' : 'Read More'}
-                  </Button>
-                </Card.Text>
-
-                {detailsVisible[idx] && (
-                  <Card.Text className="card-details">{project.details}</Card.Text>
-                )}
-
-                <div className="mt-auto">
-                  <Card.Text className="tech-div">
-                    <strong className="tech-style">Technologies:</strong> {project.techStack}
+          {sortedProjects.slice(0, visibleCount).map((project, idx) => (
+            <Col key={project.id} className="d-flex">
+              <Card className={`project-card d-flex flex-column ${detailsVisible[idx] ? 'expanded' : ''}`}>
+                <img
+                  src={project.image}
+                  alt={project.name}
+                  className="project-image"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = '/HanineLogo.png';
+                  }}
+                />
+                <Card.Body className="d-flex flex-column">
+                  <Card.Title className="card-title">{project.name}</Card.Title>
+                  <Card.Subtitle className="mb-2" style={{ fontSize: '0.8rem', color: '#d5bf9f' }}>
+                    {new Date(project.created_at).toLocaleDateString(undefined, {
+                      year: 'numeric',
+                      month: 'short',
+                      day: 'numeric',
+                    })}
+                  </Card.Subtitle>
+                  <Card.Text className="card-text card-text-bg">
+                    {project.description}{' '}
+                    <Button
+                      variant="link"
+                      className="read-btn"
+                      style={{ cursor: 'pointer', color: '#a9885d', padding: 0 }}
+                      onClick={() => handleDetailsClick(project, idx)}
+                    >
+                      {detailsVisible[idx] ? 'Read Less' : 'Read More'}
+                    </Button>
                   </Card.Text>
-                  {project.link ? (
-                    <Button variant="light" href={project.link} className="project-btn w-100" target="_blank">
-                      View Project
-                    </Button>
-                  ) : project.resources?.length > 0 ? (
-                    <Button variant="light" className="project-resources w-100" onClick={() => handleShowResources(project)}>
-                      Show Resources
-                    </Button>
-                  ) : null}
-                </div>
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
+
+                  {detailsVisible[idx] && (
+                    <Card.Text className="card-details">{project.details}</Card.Text>
+                  )}
+
+                  <div className="mt-auto">
+                    <Card.Text className="tech-div">
+                      <strong className="tech-style">Technologies:</strong> {project.techStack}
+                    </Card.Text>
+                    {project.link ? (
+                      <Button variant="light" href={project.link} className="project-btn w-100" target="_blank">
+                        View Project
+                      </Button>
+                    ) : project.resources?.length > 0 ? (
+                      <Button variant="light" className="project-resources w-100" onClick={() => handleShowResources(project)}>
+                        Show Resources
+                      </Button>
+                    ) : null}
+                  </div>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
 
           {/* Coming soon card */}
           <Col>
-            <Card className="project-card" style={{ border: '1px solid #a9885d' }}>
+            <Card className="project-card-coming-soon">
               <img
                 src="HanineLogo.png"
                 alt="Coming Soon"
@@ -183,7 +210,6 @@ function Projects() {
           </Col>
         </Row>
 
-        {/* Show More / Show Less Button */}
         {projects.length > 3 && (
           <div className="text-end mt-4">
             <Button className="show-more-projects" onClick={handleToggleShow}>
@@ -194,14 +220,11 @@ function Projects() {
 
         {/* Resources Modal */}
         {selectedProject && selectedProject.resources?.length > 0 && (
-          <Modal
-            show={true}
-            onHide={handleCloseResources}
-            size="lg"
-            centered
-          >
+          <Modal show onHide={handleCloseResources} size="lg" centered>
             <Modal.Header closeButton className='modal-project'>
-              <Modal.Title style={{fontSize:'20px'}}>Resources – {selectedProject.name}</Modal.Title>
+              <Modal.Title style={{ fontSize: '20px' }}>
+                Resources – {selectedProject.name}
+              </Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <Row>
@@ -211,7 +234,11 @@ function Projects() {
                       <Card.Img variant="top" src={res.src} />
                       <div className='mt-auto'>
                         <Card.Body>
-                          <Card.Text className="text-center" style={{fontSize:'16px'}}>{res.title}</Card.Text>
+                          <div className="mt-4">
+                            <Card.Text className="text-center" style={{ fontSize: '16px' }}>
+                              {res.title}
+                            </Card.Text>
+                          </div>
                         </Card.Body>
                       </div>
                     </Card>
@@ -221,9 +248,66 @@ function Projects() {
             </Modal.Body>
           </Modal>
         )}
+
+        {/* Details Modal for medium/large screens */}
+        {modalDetailsProject && (
+          <Modal
+            show={true}
+            onHide={handleCloseDetailsModal}
+            size="lg"
+            centered
+          >
+            <Modal.Header closeButton className="modal-project">
+              <Modal.Title style={{ fontSize: '20px' }}>
+                {modalDetailsProject.name}
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <Tabs
+                activeKey={activeModalTab}
+                onSelect={(k) => setActiveModalTab(k)}
+                id="project-modal-tabs"
+                className="mb-3"
+              >
+                <Tab eventKey="details" title="Details">
+                  <p style={{ whiteSpace: 'pre-wrap' }} className='details-style'>
+                    {modalDetailsProject.details || 'No additional details available.'}
+                  </p>
+                </Tab>
+
+                <Tab eventKey="resources" title="Resources">
+                  {modalDetailsProject.resources && modalDetailsProject.resources.length > 0 ? (
+                    <Row>
+                      {modalDetailsProject.resources.map((res, i) => (
+                        <Col md={6} key={i} className="mb-3">
+                        <Card className="h-100 d-flex flex-column project-modal">
+                          <Card.Img variant="top" src={res.src} />
+                          <Card.Body className="d-flex flex-column justify-content-end">
+                            <Card.Text className="text-center mt-auto" style={{ fontSize: '16px' }}>
+                              {res.title}
+                            </Card.Text>
+                          </Card.Body>
+                        </Card>
+                      </Col>
+                      ))}
+                    </Row>
+                  ) : modalDetailsProject.link ? (
+                    <div style={{ fontSize: '16px' }}>
+                      No resources available. You can check the project here:{' '}
+                      <a href={modalDetailsProject.link} target="_blank" rel="noopener noreferrer" className='modal-link'>
+                        View Project
+                      </a>
+                    </div>
+                  ) : (
+                    <p className="text-muted text-center">No resources or project link available.</p>
+                  )}
+                </Tab>
+              </Tabs>
+            </Modal.Body>
+          </Modal>
+        )}
       </Container>
     </div>
-  
   );
 }
 

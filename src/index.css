@@ -99,8 +99,23 @@ body[data-theme='dark'] .skills-section h2{
   transition: transform 0.3s ease;
   border-radius: 40px !important;
   background-color: #ffffff; /* default light mode */
+  height: 100% !important;
 }
 
+.project-card-coming-soon{
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  border-radius: 40px !important;
+  background-color: #ffffff;
+  border: 1px solid #a9885d !important;
+}
+
+/* Dark mode support via body attribute */
+body[data-theme='dark'] .project-card-coming-soon {
+  background-color: #3f3f3f !important;
+  color: white;
+  border: 1px solid #fff;
+}
 
 /* Dark mode support via body attribute */
 body[data-theme='dark'] .project-card {
@@ -515,14 +530,9 @@ body[data-theme='dark'] .tech-style{
 
 .details-style{
   font-size: 16px;
-  background-color: #d5bf9f21;
   border-radius: 10px;
   padding: 7px;
-}
-
-body[data-theme='dark'] .details-style{
-  background: #d5bf9f42;
-  color: #d5bf9f;
+  border: 1px dashed #d5bf9f;
 }
 
 .project-modal{
@@ -563,6 +573,11 @@ body[data-theme='dark'] .modal-body .card{
 
 .nav-tabs .nav-link:hover{
   color:#a9885d;
+  border: 1px solid #a9885d !important;
+}
+
+.modal-link{
+  color: #a9885d !important; 
 }
 
 
