@@ -110,6 +110,11 @@ body[data-theme='dark'] .skills-section h2{
   border: 1px solid #a9885d !important;
 }
 
+.project-card-coming-soon:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
 /* Dark mode support via body attribute */
 body[data-theme='dark'] .project-card-coming-soon {
   background-color: #3f3f3f !important;
@@ -176,6 +181,12 @@ body[data-theme='dark'] .project-card {
   font-size: 18px !important;
   color: #958165 !important;
   font-weight: bold !important;
+}
+
+.project-next svg {
+  vertical-align: middle;
+  font-size: 1.2rem;
+  margin-bottom: 3px;
 }
 
 body[data-theme='dark'] .project-next{
@@ -580,5 +591,27 @@ body[data-theme='dark'] .modal-body .card{
   color: #a9885d !important; 
 }
 
+.animated-icon {
+  margin-right: 8px;
+  color: #a9885d;
+  animation: pulseGlow 1.5s infinite;
+  vertical-align: middle;
+  font-size: 1.2rem;
+}
+
+@keyframes pulseGlow {
+  0% {
+    transform: scale(1);
+    text-shadow: 0 0 0px #a9885d;
+  }
+  50% {
+    transform: scale(1.15);
+    text-shadow: 0 0 8px #a9885d;
+  }
+  100% {
+    transform: scale(1);
+    text-shadow: 0 0 0px #a9885d;
+  }
+}
 
 

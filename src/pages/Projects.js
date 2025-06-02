@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Card, Button, Col, Row, Container, Spinner, Alert, Modal, Tabs, Tab } from 'react-bootstrap';
+import { FaRocket } from 'react-icons/fa';
 
 function Projects() {
   const [projects, setProjects] = useState([]);
@@ -202,9 +203,10 @@ function Projects() {
                 }}
               />
               <Card.Body>
-                <Card.Text className="project-next" style={{ textAlign: 'center' }}>
-                  What's the next?
-                </Card.Text>
+              <Card.Text className="project-next text-center">
+                <FaRocket className="animated-icon" />
+                What's the next?
+              </Card.Text>
               </Card.Body>
             </Card>
           </Col>
@@ -263,25 +265,41 @@ function Projects() {
               </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <Tabs
-                activeKey={activeModalTab}
-                onSelect={(k) => setActiveModalTab(k)}
-                id="project-modal-tabs"
-                className="mb-3"
-              >
-                <Tab eventKey="details" title="Details">
-                  <p style={{ whiteSpace: 'pre-wrap' }} className='details-style'>
+            <Tabs
+              activeKey={activeModalTab}
+              onSelect={(k) => setActiveModalTab(k)}
+              id="project-modal-tabs"
+              className="mb-3"
+            >
+
+           <Tab eventKey="details" title="Details">
+              <div
+                  className="d-flex align-items-center"
+                  style={{ minHeight: '140px' }}
+                >
+                  <p
+                    style={{ whiteSpace: 'pre-wrap', fontSize: '16px' }}
+                    className="details-style m-0"
+                  >
                     {modalDetailsProject.details || 'No additional details available.'}
                   </p>
-                </Tab>
+                </div>
+            </Tab>
 
-                <Tab eventKey="resources" title="Resources">
-                  {modalDetailsProject.resources && modalDetailsProject.resources.length > 0 ? (
-                    <Row>
-                      {modalDetailsProject.resources.map((res, i) => (
-                        <Col md={6} key={i} className="mb-3">
+              <Tab eventKey="resources" title="Resources">
+                {modalDetailsProject.resources && modalDetailsProject.resources.length > 0 ? (
+                  <Row>
+                    {modalDetailsProject.resources.map((res, i) => (
+                      <Col md={6} key={i} className="mb-3">
                         <Card className="h-100 d-flex flex-column project-modal">
-                          <Card.Img variant="top" src={res.src} />
+                          <Card.Img
+                              variant="top"
+                              src={res.src}
+                              onError={(e) => {
+                                e.target.onerror = null; // Prevent infinite loop
+                                e.target.src = '/HanineLogo.png'; // Fallback image
+                              }}
+                            />
                           <Card.Body className="d-flex flex-column justify-content-end">
                             <Card.Text className="text-center mt-auto" style={{ fontSize: '16px' }}>
                               {res.title}
@@ -289,21 +307,37 @@ function Projects() {
                           </Card.Body>
                         </Card>
                       </Col>
-                      ))}
-                    </Row>
-                  ) : modalDetailsProject.link ? (
-                    <div style={{ fontSize: '16px' }}>
-                      No resources available. You can check the project here:{' '}
-                      <a href={modalDetailsProject.link} target="_blank" rel="noopener noreferrer" className='modal-link'>
-                        View Project
-                      </a>
-                    </div>
-                  ) : (
-                    <p className="text-muted text-center">No resources or project link available.</p>
-                  )}
-                </Tab>
-              </Tabs>
-            </Modal.Body>
+                    ))}
+                  </Row>
+                ) : modalDetailsProject.link ? (
+                  <div
+                  className="d-flex align-items-center justify-content-center text-center"
+                  style={{ minHeight: '140px', fontSize: '16px' }}
+                >
+                  <div>
+                    No resources available. You can check the project here:{' '}
+                    <a
+                      href={modalDetailsProject.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="modal-link"
+                    >
+                      View Project
+                    </a>
+                  </div>
+                </div>
+                
+                ) : (
+                  <div
+                    className="d-flex justify-content-center align-items-center text-muted"
+                    style={{ height: '100%', minHeight: '300px' }}
+                  >
+                    No resources or project link available.
+                  </div>
+                )}
+              </Tab>
+            </Tabs>
+          </Modal.Body>
           </Modal>
         )}
       </Container>
