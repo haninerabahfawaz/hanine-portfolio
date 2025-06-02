@@ -614,4 +614,13 @@ body[data-theme='dark'] .modal-body .card{
   }
 }
 
+.clickable-img {
+  transition: transform 0.2s ease;
+}
+
+.clickable-img:hover {
+  transform: scale(1.02);
+}
+
+
 

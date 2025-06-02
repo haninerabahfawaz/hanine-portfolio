@@ -69,7 +69,7 @@ const AboutSection = () => {
   } = aboutInfo;
 
   return (
-    <section className="py-5">
+    <section className="py-3">
       <Container>
         <Quotes/>
         <Row className="align-items-center">
